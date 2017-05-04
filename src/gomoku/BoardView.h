@@ -9,6 +9,6 @@ public:
 	void StartGame();
 private:
 	Board *myB;
-	void Show();
+	void Show() const;
 };
 

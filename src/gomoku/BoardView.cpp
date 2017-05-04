@@ -9,13 +9,15 @@ BoardView::~BoardView()
 {
 }
 
-void BoardView::Show() {
+void BoardView::Show() const
+{
 	int size = myB->getSize();
 
 	printf("\n");
-	for (size_t i = 0; i < size; i++) {
-		for (size_t j = 0; j < size; j++) {
-			
+	for (size_t i = 0; i < size; i++) 
+	{
+		for (size_t j = 0; j < size; j++) 
+		{
 			Sign cell = myB->getCell(i, j);
 			switch (cell) {
 			case Sign::White:
@@ -34,23 +36,26 @@ void BoardView::Show() {
 	}
 }
 
-void BoardView::StartGame() {
-	while (myB->isWin() == Continue) {
-		int line = 0;
-		int column = 0;
+void BoardView::StartGame() 
+{
+	int line = 0;
+	int column = 0;
+	Sign whoShouldMove = Sign::White;
 
+	while (myB->isWin() == Continue) 
+	{
 		Show();
-		printf("First player: input line and column\n");
-		scanf("%d %d", &line, &column);
-		myB->makeMove(line, column, Sign::White);
-		
-		line = 0;
-		column = 0;
+		do
+		{
+			printf("%d player: input line and column\n", whoShouldMove);
+			scanf("%d %d", &line, &column);
+		}
+		while (!myB->makeMove(line, column, whoShouldMove));
 
-		Show();
-		printf("Second player: input line and column\n");
-		scanf("%d %d", &line, &column);
-		myB->makeMove(line, column, Sign::Black);
+		if (whoShouldMove == Sign::White)
+			whoShouldMove = Sign::Black;
+		else
+			whoShouldMove = Sign::White;
 	}
 
 	printf("Game over");

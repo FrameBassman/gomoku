@@ -15,8 +15,11 @@ Board::~Board()
 {
 }
 
-bool Board::makeMove(int x, int y, Sign sign)
+bool Board::makeMove(const int x, const int y, const Sign sign)
 {
+	if (x > FIELD_SIZE - 1 || y > FIELD_SIZE - 1)
+		return false;
+
 	if (getCell(x, y) == Sign::Free)
 	{
 		if (sign == Sign::White)
@@ -40,7 +43,7 @@ Turn Board::isWin()
 	return Continue;
 }
 
-Sign Board::getCell(int x, int y) const
+Sign Board::getCell(const int x, const int y) const
 {
 	if (b[x][y] == 1)
 		return Sign::White;
