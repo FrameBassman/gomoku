@@ -8,7 +8,8 @@ public:
 	~BoardView();
 	void StartGame();
 private:
-	Board *myB;
+	Board *mainBoard;
 	void Show() const;
+	void Swap(Sign& a1, Sign& a2);
 };
 
