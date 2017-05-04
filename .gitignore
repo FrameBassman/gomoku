@@ -27,3 +27,8 @@
 *.exe
 *.out
 *.app
+*.tlog
+*.lastbuildstate
+
+# Debug files
+*.idb
